@@ -38,3 +38,15 @@ form h1{
     font-weight: 500;
     color: antiquewhite;
 }
+
+
+/* box-input */
+.box-input{
+    margin: 30px 0;
+    width: 310px;
+    border-bottom: 2px solid #fff;
+    position: relative;
+}
+.box-input label{
+    position: absolute;
+}
