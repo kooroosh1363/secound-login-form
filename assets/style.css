@@ -81,3 +81,26 @@ input:focus ~ :valid{
     font-size: 1.5rem;
     top: 10px;
 }
+
+
+/* forget css */
+.forget{
+    font-size: .9em;
+    margin: -15px 0 15px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+}
+
+.forget label input{
+    margin-right:4px; 
+}
+
+.forget a{
+    color: #fff;
+    text-decoration: none;
+    margin-left: 5px;
+}
+.forget a:hover{
+    text-decoration: underline;
+}
