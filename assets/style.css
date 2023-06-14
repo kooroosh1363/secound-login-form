@@ -14,7 +14,6 @@ section{
     justify-content: center;
     min-height: 100vh;
     width: 100%;
-    background: greenyellow;
 
 }
 
@@ -23,11 +22,14 @@ section{
 .box-form{
     width: 400px;
     height: 450px;
-    background: orangered;
+    background: transparent;
+    background: transparent;
+    backdrop-filter: blur(7px);
     display: grid;
     justify-items: center;
     align-items: center;
     position: relative;
+    border-radius: 30px;
 }
 
 
@@ -59,7 +61,7 @@ form h1{
 }
 
 input:focus ~ label,
-input:focus ~ :valid{
+input:valid ~ label{
     top: -5px;
 }
 
@@ -140,4 +142,28 @@ button{
 .register a:hover{
     text-decoration: underline;
     color: rgb(45, 176, 58);
+}
+
+
+
+/* video */
+.video{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+
+}
+
+@media (min-aspect-ratio:16/9){
+    .back-video{
+        width: 100%;
+        height: auto;
+    }
+}
+@media (max-aspect-ratio:16/9){
+    .back-video{
+        width: auto;
+        height: 100%;
+    }
 }
