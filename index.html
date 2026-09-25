@@ -1,51 +1,128 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RAAD-login</title>
-    <link rel="stylesheet" href="./assets/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A progressive two-step sign-in UX demo with a lightweight terminal aesthetic and zero runtime dependencies.">
+  <meta name="color-scheme" content="dark light">
+  <title>Terminal Access — Progressive Sign-In Demo</title>
+  <link rel="stylesheet" href="./assets/style.css">
+  <script type="module" src="./assets/js/app.js"></script>
 </head>
-
 <body>
-    <section>
-        
-        <video autoplay muted loop plays-inline class="video">
-            <source src="./assets/img/Matrix - 47802.mp4" type="video/mp4">
-        </video>
-        <div class="box-form">
-            <div class="value-form">
-                <form action="#">
-                    <h1>Login</h1>
-                    <div class="box-input">
-                        <i class="bi bi-envelope-at-fill"></i>
-                        <input type="email" required>
-                        <label for="">Email</label>
-                    </div>
-                    <div class="box-input">
-                        <i class="bi bi-file-earmark-lock2-fill"></i>
-                        <input type="password" required>
-                        <label for="">Password</label>
-                    </div>
-                    <div class="forget">
-                        <label for=""><input type="checkbox">Remember Me<a href="#">Forget Password</a></label>
-                        
-                    </div>
-                    <button>Login</button>
-                    <div class="register">
-                        <p>Don't have a account <a href="#">Register</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
-</body>
+  <a class="skip-link" href="#identity-form">Skip to sign in</a>
 
+  <main class="shell">
+    <section class="story" aria-labelledby="page-title">
+      <a class="brand" href="./" aria-label="Terminal Access home">
+        <span class="brand-mark" aria-hidden="true">TA</span>
+        <span>Terminal Access</span>
+      </a>
+
+      <div class="story-copy">
+        <p class="eyebrow">Progressive auth UX / frontend-only</p>
+        <h1 id="page-title">A two-step sign-in flow, without a 10MB background video.</h1>
+        <p>
+          This demo focuses on interaction design: identify the account first, then ask
+          for the secret. State is explicit, testable, and kept entirely in the browser.
+        </p>
+      </div>
+
+      <div class="terminal-panel" aria-hidden="true">
+        <div class="terminal-line"><span>01</span><code>identify(user)</code></div>
+        <div class="terminal-line"><span>02</span><code>verify(secret)</code></div>
+        <div class="terminal-line"><span>03</span><code>complete(local_demo)</code></div>
+      </div>
+    </section>
+
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="card-heading">
+        <p class="section-index">Session / local demo</p>
+        <h2 id="auth-title">Sign in</h2>
+        <p id="global-status" class="global-status" aria-live="polite"></p>
+      </div>
+
+      <section id="identity-step" class="step-panel">
+        <form id="identity-form" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="username"
+              maxlength="254"
+              required
+              aria-describedby="identity-error"
+            >
+            <p id="identity-error" class="field-error" role="alert"></p>
+          </div>
+
+          <button class="primary-button" type="submit">
+            Continue <span aria-hidden="true">→</span>
+          </button>
+        </form>
+      </section>
+
+      <section id="secret-step" class="step-panel" hidden>
+        <div class="identity-summary">
+          <div>
+            <span>Account</span>
+            <strong id="selected-identity"></strong>
+          </div>
+          <button id="change-identity" class="text-button" type="button">Change</button>
+        </div>
+
+        <form id="secret-form" novalidate>
+          <div class="field">
+            <div class="password-wrap">
+              <label for="password">Password</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                minlength="8"
+                maxlength="128"
+                required
+                aria-describedby="caps-lock-status secret-error"
+              >
+              <button
+                id="password-toggle"
+                class="password-toggle"
+                type="button"
+                aria-pressed="false"
+                aria-label="Show password"
+              >Show</button>
+            </div>
+            <p id="caps-lock-status" class="field-hint" role="status"></p>
+            <p id="secret-error" class="field-error" role="alert"></p>
+          </div>
+
+          <label class="remember-row" for="remember">
+            <input id="remember" name="remember" type="checkbox">
+            <span>Remember this email on this device</span>
+          </label>
+
+          <button class="primary-button" type="submit">
+            Complete demo <span aria-hidden="true">→</span>
+          </button>
+        </form>
+      </section>
+
+      <section id="success-step" class="step-panel success-panel" hidden>
+        <div class="success-mark" aria-hidden="true">✓</div>
+        <h3>Flow completed.</h3>
+        <p>No network request was made and no password was stored.</p>
+        <button id="reset-flow" class="secondary-button" type="button">Run again</button>
+      </section>
+
+      <p class="privacy-note">
+        This is a frontend UX demo, not real authentication. A production sign-in system
+        still requires a secure backend, password hashing, sessions/tokens, rate limits,
+        and account lifecycle controls.
+      </p>
+    </section>
+  </main>
+</body>
 </html>
