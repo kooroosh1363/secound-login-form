@@ -1,0 +1,15 @@
+{
+  "name": "terminal-progressive-signin",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A progressive two-step sign-in UX demo with a lightweight terminal aesthetic.",
+  "scripts": {
+    "test": "node --test",
+    "check:syntax": "node --check assets/js/auth-flow.js && node --check assets/js/storage.js && node --check assets/js/app.js && node --check tests/auth-flow.test.js && node --check tests/storage.test.js && node --check tests/markup.test.js",
+    "check": "npm run check:syntax && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
